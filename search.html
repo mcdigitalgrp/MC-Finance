@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Search Results - MC Finance</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="shortcut icon" href="icon.png" type="image/x-icon">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@100..800&family=Baloo+Thambi+2:wght@400..800&family=Catamaran:wght@100..900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Karla+Tamil+Upright:wght@400;700&family=Mukta+Malar:wght@200;300;400;500;600;700;800&family=Noto+Sans+Tamil:wght@100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Righteous&family=Solway:wght@300;400;500;700;800&display=swap');
+
+/* ===== Reset ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+   font-family: "Inter", sans-serif;
+}
+
+/* ================= HEADER ================= */
+/* ===== Header ===== */
+.header{
+  background:#fff;
+  box-shadow:0 2px 6px rgba(0,0,0,0.06);
+  width:100%;
+}
+
+/* Single Row */
+.header-row{
+  max-width:1200px;
+  margin:auto;
+  padding:12px 20px;
+
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+/* Back button */
+.back-btn{
+  font-size:20px;
+  color:#333;
+  text-decoration:none;
+  padding:8px;
+  border-radius:50%;
+  transition:0.3s;
+}
+
+.back-btn:hover{
+  background:#f2f2f2;
+  color:#dc143b;
+}
+
+/* Logo */
+.logo img{
+  height:45px;
+}
+
+/* Nav */
+.nav{
+  margin-left:auto;   /* pushes nav to right */
+  display:flex;
+  gap:25px;
+  flex-wrap:wrap;
+}
+
+.nav a{
+  text-decoration:none;
+  font-weight:600;
+  color:#000;
+}
+
+.nav a:hover{
+  color:#dc143b;
+  text-decoration:underline;
+}
+
+/* ===== Mobile ===== */
+@media(max-width:768px){
+
+  .header-row{
+    flex-wrap:wrap;
+  }
+
+  .nav{
+    width:100%;
+    justify-content:center;
+    margin-top:8px;
+  }
+}
+/* ================= SEARCH RESULTS ================= */
+
+body{
+  background:#f5f7fb;
+}
+
+.page-title{
+  text-align:center;
+  margin:30px 0;
+}
+
+.results{
+  max-width:1000px;
+  margin:auto;
+  padding:0 20px 40px;
+  display:grid;
+  grid-template-columns:repeat(4, 1fr); 
+  gap:18px;
+}
+
+/* Card */
+.card{
+  background:#fff;
+  border-radius:10px;
+  overflow:hidden;
+  text-decoration:none;
+  color:#222;
+  box-shadow:0 3px 10px rgba(0,0,0,0.08);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+}
+
+.card img{
+  width:100%;
+  height:170px;
+  object-fit:cover;
+}
+
+.card-content{
+  padding:15px;
+}
+
+.no-result{
+  text-align:center;
+  color:#777;
+  font-weight:bold;
+}
+
+/* ===== Tablet ===== */
+@media(max-width:992px){
+  .results{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+/* ===== Mobile ===== */
+@media(max-width:600px){
+  .results{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<!-- ===== HEADER ===== -->
+
+
+
+<header class="header">
+
+  <div class="header-row">
+
+    <!-- Back Icon -->
+    <a href="index.html" class="back-btn">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+
+    <!-- Logo -->
+    <div class="logo">
+      <img src="logo.png" alt="MC Finance Logo">
+    </div>
+
+    <!-- Nav Links -->
+    <nav class="nav">
+       <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="terms-condtion.html">Terms Condition</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <!-- <a href="contact-us.html">Contact us</a> -->
+    </nav>
+
+  </div>
+
+</header>
+
+
+<!-- ===== SEARCH RESULTS ===== -->
+<h2 class="page-title" id="searchTitle">Search Results</h2>
+
+<div class="results" id="results"></div>
+
+<p class="no-result" id="noResult" style="display:none;">
+No articles found
+</p>
+
+
+
+<script>
+
+/* Your posts database */
+const posts = [
+{
+title:"சிறந்த 5 post office scheme ",
+desc:"சிறிய தொகையிலிருந்து சேமிக்க ஆரம்பித்தால் கூட, அது எதிர்காலத்தில் பெரிய உதவியாக மாறும்.",
+img:"savings.jpeg",
+link:"savings-tips.html"
+},
+{
+title:"மாதம் சேமித்து பெரிய தொகை பெறுவது எப்படி? Recurring Deposit",
+desc:"சிறிய தொகையை மாதம் மாதம் சேமித்து, 5 ஆண்டுகளுக்கு பிறகு பெரிய தொகை + வட்டி பெறலாம்.",
+img:"rd-scheme.jpeg",
+link:"rd-scheme.html"
+},
+{
+title:"RD vs FD Comparison",
+desc:"Which investment is better?",
+img:"cover3.jpg",
+link:"post3.html"
+}
+];
+
+
+/* Search Logic */
+const params = new URLSearchParams(window.location.search);
+const query = params.get("q")?.toLowerCase() || "";
+
+document.getElementById("searchTitle").innerText =
+"Search results for: " + query;
+
+const resultsDiv = document.getElementById("results");
+
+const filtered = posts.filter(post =>
+post.title.toLowerCase().includes(query) ||
+post.desc.toLowerCase().includes(query)
+);
+
+if(filtered.length === 0){
+document.getElementById("noResult").style.display = "block";
+}
+
+filtered.forEach(post=>{
+resultsDiv.innerHTML += `
+<a href="${post.link}" class="card">
+  <img src="${post.img}">
+  <div class="card-content">
+    <h3>${post.title}</h3>
+    <p>${post.desc}</p>
+  </div>
+</a>
+`;
+});
+
+</script>
+
+</body>
+</html>
